@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./course2/python/lab-1/src"
+    ]
+}
