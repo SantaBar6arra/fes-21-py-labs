@@ -1,9 +1,6 @@
 from game import *
-
-
 WHITE = "white"
 BLACK = "black"
-
 uniDict = {
     BLACK : {
         Pawn : "♙", 
