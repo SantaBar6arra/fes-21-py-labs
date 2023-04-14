@@ -5,7 +5,7 @@ CountWordsTest()
 IsPalinfrome_Test()
 GetPalingrams_Test()
 GetPalingrams_V2_Test()
-print('everything passed')
+print('Тести пройдено')
 
 MyFile: Tuple[str, int] = ReadFile('C:/Users/Ivan/OneDrive/Рабочий стол/Folders/Lab for Uni/course2sem2/lab1py/text.txt')
 print(f"""
@@ -18,7 +18,7 @@ print(palindromes)
 print("*********************************************")
 file.close()
 
-file = open('C:/Users/Ivan/OneDrive/Рабочий стол/Folders/Lab for Uni/course2sem2/lab1py/palingrams_sus.txt')
+file = open('C:/Users/Ivan/OneDrive/Рабочий стол/Folders/Lab for Uni/course2sem2/lab1py/palingrams.txt')
 txt: str = file.read()
 print(GetPalingrams(txt))
 print("*********************************************") 
