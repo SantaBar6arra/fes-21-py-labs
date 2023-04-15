@@ -1,5 +1,6 @@
-from constants import *
+from figures import *
 import random
+
 
 class Engine:
     def __init__(self):
@@ -8,7 +9,7 @@ class Engine:
         self.gameboard = {}
         self.is_active = True
         self.setupBoard()
-        print('enter moves like "b1 c3"')
+        print('Enter moves. Example "f1 f3"')
         self.run()
         
     def setupBoard(self):
@@ -21,7 +22,7 @@ class Engine:
         self.placeFigures(BLACK, blackFiguresCount)
 
     def placeFigures(self, color, figuresCount):
-        figures_av = {
+        figuresAv = {
             Queen: 1,
             Rook: 2,
             Knight: 2,
@@ -29,20 +30,20 @@ class Engine:
             Pawn: 8
         }
 
-        figures = [Rook,Knight,Bishop,Queen,Pawn]
+        figures = [Rook, Knight, Bishop, Queen, Pawn]
 
         for i in range(figuresCount):
             figureType = figures[random.randint(0, len(figures)-1)]
         
-            figure = Figure(None, None) # mock to save it for bigger scope
+            figure = Figure(None, None)
             if figureType == Pawn:
                 figure = figureType(color, uniDict[color][figureType], 1 if color == WHITE else -1)
             else:
                 figure = figureType(color, uniDict[color][figureType])
             self.setFigureToField(figure)
 
-            figures_av[figureType] -= 1
-            if figures_av[figureType] == 0:
+            figuresAv[figureType] -= 1
+            if figuresAv[figureType] == 0:
                 figures.remove(figureType)
 
     def setFigureToField(self, figure):
@@ -51,7 +52,7 @@ class Engine:
         while isFieldSet == False:
             pretendedField = (0,0)
 
-            if hasattr(figure, 'direction'):
+            if hasattr(figure, 'Direction'):
                 if figure.Color == WHITE:
                     pretendedField = (random.randint(0, 8), random.randint(1, 4))
                 else:
@@ -59,7 +60,7 @@ class Engine:
             else:
                 pretendedField = (random.randint(0, 8), random.randint(0, 8))
 
-            if  pretendedField not in self.gameboard: # if no one is there
+            if  pretendedField not in self.gameboard:
                 isFieldSet = True
                 self.gameboard[pretendedField] = figure
 
@@ -73,6 +74,7 @@ class Engine:
             print(self.message)
             self.message = ''
             startpos,endpos = self.parsePrompt()
+
             try:
                 target = self.gameboard[startpos]
             except:
@@ -110,6 +112,7 @@ class Engine:
     def isCheck(self):
         kingDict = {}
         pieceDict = {BLACK : [], WHITE : []}
+
         for position,piece in self.gameboard.items():
             if type(piece) == King:
                 kingDict[piece.Color] = position
@@ -118,6 +121,7 @@ class Engine:
         if self.isKingReachable(kingDict[WHITE],pieceDict[BLACK]):
             self.message = 'White player is in check'
             return True
+        
         if self.isKingReachable(kingDict[BLACK],pieceDict[WHITE]):
             self.message = 'Black player is in check'
             return True
@@ -163,9 +167,9 @@ class Engine:
         print("  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |")
         for i in range(8):
             print("--" + "|---" * 8 + "|")
-            print(" " + chr(i+97), end="| ")
+            print(" " + chr(i + 97), end="| ")
             for j in range(8):
-                item = self.gameboard.get((i,j), " ")
+                item = self.gameboard.get((i, j), " ")
                 print(str(item) + ' |', end = " ")
             print()
         print("  " + "-" * 33)

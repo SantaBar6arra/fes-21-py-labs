@@ -1,3 +1,6 @@
+from figures import *
+
+
 class Figure:
     def __init__(self,color,name):
         self.name = name
@@ -40,29 +43,8 @@ class Figure:
     
     def isNoConflict(self, gameboard, initialColor, x, y):
         if self.isInBounds(x,y) and (((x, y) not in gameboard) or gameboard[(x, y)].Color != initialColor) : return True
-        return False      
-        
-chessCardinals = [(1, 0),  (0, 1), (-1, 0),  (0, -1)]
-chessDiagonals = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
+        return False     
 
-def knights(x, y, int1, int2):
-    return [(x + int1, y + int2),
-            (x - int1, y + int2),
-            (x + int1, y - int2),
-            (x - int1, y - int2),
-            (x + int2, y + int1),
-            (x - int2, y + int1),
-            (x + int2, y - int1),
-            (x - int2, y - int1)]
-def kings(x, y):
-    return [(x + 1, y),
-            (x + 1, y + 1),
-            (x + 1,y - 1),
-            (x, y + 1),
-            (x, y - 1),
-            (x - 1, y),
-            (x - 1, y + 1),
-            (x - 1, y - 1)]
 
 class Knight(Figure):
     def getAvaliableMoves(self, x, y, gameboard, Color = None):
@@ -89,6 +71,7 @@ class King(Figure):
         if Color is None : Color = self.Color
         return [(xx, yy) for xx, yy in kings(x, y) if self.isNoConflict(gameboard, Color, xx, yy)]
         
+
 class Pawn(Figure):
     def __init__(self, color, name, direction):
         self.name = name
@@ -102,3 +85,50 @@ class Pawn(Figure):
         if (x - 1, y + self.direction) in gameboard and self.isNoConflict(gameboard, Color, x-1, y+self.direction) : answers.append((x-1,y+self.direction))
         if (x, y + self.direction)     not in gameboard and Color == self.Color : answers.append((x, y + self.direction))
         return answers
+        
+        
+chessCardinals = [(1, 0),  (0, 1), (-1, 0),  (0, -1)]
+chessDiagonals = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
+
+def knights(x, y, int1, int2):
+    return [(x + int1, y + int2),
+            (x - int1, y + int2),
+            (x + int1, y - int2),
+            (x - int1, y - int2),
+            (x + int2, y + int1),
+            (x - int2, y + int1),
+            (x + int2, y - int1),
+            (x - int2, y - int1)]
+def kings(x, y):
+    return [(x + 1, y),
+            (x + 1, y + 1),
+            (x + 1,y - 1),
+            (x, y + 1),
+            (x, y - 1),
+            (x - 1, y),
+            (x - 1, y + 1),
+            (x - 1, y - 1)]
+
+
+
+WHITE = "White player"
+BLACK = "Black player"
+
+uniDict = {
+    BLACK : {
+        Pawn :   "♙", 
+        Rook :   "♖", 
+        Knight : "♘", 
+        Bishop : "♗", 
+        King :   "♔", 
+        Queen :  "♕" 
+    }, 
+    WHITE : {
+        Pawn :   "♟", 
+        Rook :   "♜", 
+        Knight : "♞", 
+        Bishop : "♝", 
+        King :   "♚", 
+        Queen :  "♛" 
+    }
+}
