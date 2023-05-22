@@ -1,0 +1,130 @@
+from abc import ABC, abstractmethod 
+ 
+# Base class for all team members 
+class TeamMember(ABC): 
+    def __init__(self, name): 
+        self.name = name 
+ 
+    @abstractmethod 
+    def perform_duty(self): 
+        pass 
+ 
+# Developer class with skills attribute 
+class Developer(TeamMember): 
+    def __init__(self, name, skills): 
+        super().__init__(name) 
+        self.skills = skills 
+ 
+    def perform_duty(self): 
+        print(f"Developer {self.name} is developing software.") 
+ 
+# SoftwareArchitect class 
+class SoftwareArchitect(TeamMember): 
+    def perform_duty(self): 
+        print(f"Software Architect {self.name} is designing software architecture.") 
+ 
+# TeamLead class 
+class TeamLead(TeamMember): 
+    def perform_duty(self): 
+        print(f"Team Lead {self.name} is managing the team.") 
+ 
+# QA class 
+class QA(TeamMember): 
+    def perform_duty(self): 
+        print(f"QA {self.name} is testing the software.") 
+ 
+# BusinessAnalyst class 
+class BusinessAnalyst(TeamMember): 
+    def perform_duty(self): 
+        print(f"Business Analyst {self.name} is analyzing the requirements.") 
+ 
+# Base class for all software components 
+class Software(ABC): 
+    @abstractmethod 
+    def develop(self): 
+        pass 
+ 
+# MobileApp class 
+class MobileApp(Software): 
+    def develop(self): 
+        print("Developing Mobile App.") 
+ 
+# WebApp class 
+class WebApp(Software): 
+    def develop(self): 
+        print("Developing Web App.") 
+ 
+# DatabaseAPI class 
+class DatabaseAPI(Software): 
+    def develop(self): 
+        print("Developing Database API.") 
+ 
+# Containerization class 
+class Containerization(Software): 
+    def develop(self): 
+        print("Performing Containerization.") 
+ 
+# Deployment class 
+class Deployment(Software): 
+    def develop(self): 
+        print("Performing Deployment.") 
+ 
+# Project class representing the pipeline 
+class Project: 
+    def __init__(self): 
+        self.team_members = [] 
+        self.software_components = [] 
+ 
+    def add_team_member(self, team_member): 
+        self.team_members.append(team_member) 
+ 
+    def add_software_component(self, software_component): 
+        self.software_components.append(software_component) 
+ 
+    def execute_pipeline(self): 
+        for member in self.team_members: 
+            member.perform_duty() 
+ 
+        for component in self.software_components: 
+            component.develop() 
+ 
+# Example usage 
+def main(): 
+    # Create project 
+    project = Project() 
+ 
+    # Create team members 
+    developer1 = Developer("John", ["Python", "Java"]) 
+    developer2 = Developer("Emily", ["JavaScript", "C++"]) 
+    architect = SoftwareArchitect("Alice") 
+    team_lead = TeamLead("Bob") 
+    qa = QA("Sarah") 
+    analyst = BusinessAnalyst("David") 
+ 
+    # Add team members to project 
+    project.add_team_member(developer1) 
+    project.add_team_member(developer2) 
+    project.add_team_member(architect) 
+    project.add_team_member(team_lead) 
+    project.add_team_member(qa) 
+    project.add_team_member(analyst) 
+ 
+    # Create software components 
+    mobile_app = MobileApp() 
+    web_app = WebApp() 
+    database_api = DatabaseAPI() 
+    containerization = Containerization() 
+    deployment = Deployment() 
+ 
+    # Add software components to project 
+    project.add_software_component(mobile_app) 
+    project.add_software_component(web_app) 
+    project.add_software_component(database_api) 
+    project.add_software_component(containerization) 
+    project.add_software_component(deployment) 
+ 
+    # Execute project pipeline 
+    project.execute_pipeline() 
+ 
+if name == "__main__": 
+    main()
